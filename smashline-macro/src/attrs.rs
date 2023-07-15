@@ -21,6 +21,7 @@ mod kw {
 }
 
 // taken from skyline-rs hooking implementation
+#[repr(C)]
 pub struct MetaItem<Keyword: Parse, Item: Parse> {
     pub ident: Keyword,
     pub item: Item,
@@ -42,6 +43,7 @@ impl<Keyword: Parse, Item: Parse> Parse for MetaItem<Keyword, Item> {
     }
 }
 
+#[repr(C)]
 struct BracketedList<Keyword: Parse, Item: Parse, Punctuation: Parse> {
     pub ident: Keyword,
     pub list: punctuated::Punctuated<Item, Punctuation>,
@@ -65,6 +67,7 @@ impl<Keyword: Parse, Item: Parse, Punctuation: Parse> Parse
     }
 }
 
+#[repr(C)]
 pub struct StateTracker {
     pub feature: Option<syn::LitStr>,
 }
@@ -85,6 +88,7 @@ impl Parse for StateTracker {
     }
 }
 
+#[repr(C)]
 pub struct RawHook {
     pub feature: Option<syn::LitStr>,
     pub hook_args: TokenStream,
@@ -140,6 +144,7 @@ impl Parse for HookSymbol {
     }
 }
 
+#[repr(C)]
 pub struct HookAttrs {
     pub module: HookModule,
     pub symbol: HookSymbol,
@@ -220,6 +225,7 @@ impl Parse for Hashable {
     }
 }
 
+#[repr(C)]
 pub struct AcmdAttrs {
     pub agent: Hashable,
     pub scripts: Vec<Hashable>,
@@ -322,6 +328,7 @@ impl Parse for LuaConst {
     }
 }
 
+#[repr(C)]
 pub struct StatusAttrs {
     pub agent: Hashable,
     pub status: LuaConst,
@@ -391,6 +398,7 @@ impl Parse for StatusAttrs {
     }
 }
 
+#[repr(C)]
 pub struct CommonStatusAttrs {
     pub status: LuaConst,
     pub condition: LuaConst,
@@ -447,6 +455,7 @@ impl Parse for CommonStatusAttrs {
     }
 }
 
+#[repr(C)]
 pub struct AgentFrameAttrs {
     pub agent: Option<LuaConst>,
     pub on_main: bool,
@@ -507,6 +516,7 @@ impl Parse for AgentFrameAttrs {
     }
 }
 
+#[repr(C)]
 pub struct AgentFrameCallbackAttrs {
     pub on_main: bool,
 }

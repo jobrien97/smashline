@@ -8,6 +8,7 @@ use syn::punctuated::Punctuated;
 use quote::{quote, ToTokens, TokenStreamExt};
 use proc_macro2::TokenStream as TokenStream2;
 
+#[repr(C)]
 #[derive(Debug)]
 struct AcmdFuncCall {
     pub name: Path,
@@ -16,6 +17,7 @@ struct AcmdFuncCall {
     pub semi: Option<Token![;]>,
 }
 
+#[repr(C)]
 #[derive(Debug)]
 struct ArgExpr {
     pub name: Option<Ident>,
@@ -168,6 +170,7 @@ mod kw {
     syn::custom_keyword!(Iterations);
 }
 
+#[repr(C)]
 struct AcmdBlock {
     pub braces: syn::token::Brace,
     pub statements: Vec<AcmdStatement>
@@ -195,6 +198,7 @@ impl ToTokens for AcmdBlock {
     }
 }
 
+#[repr(C)]
 struct AcmdIf {
     pub if_token: Token![if],
     pub parens: syn::token::Paren,
@@ -227,6 +231,7 @@ impl Parse for AcmdIf {
     }
 }
 
+#[repr(C)]
 struct AcmdFor {
     pub for_token: Token![for],
     pub parens: syn::token::Paren,
@@ -248,6 +253,7 @@ impl Parse for AcmdFor {
     }
 }
 
+#[repr(C)]
 struct InlineRustBlock {
     pub rust_token: kw::rust,
     pub block: syn::Block
@@ -327,6 +333,7 @@ impl ToTokens for AcmdStatement {
     }
 }
 
+#[repr(C)]
 struct AcmdInput {
     pub l2c_state: Option<Expr>,
     pub acmd: AcmdBlock
